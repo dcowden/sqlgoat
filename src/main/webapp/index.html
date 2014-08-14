@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SqlGoat</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h1>SqlGoat Attack Targets</h1>
+        <table border="1" cellpadding="10">
+            <tr><th>Description</th><th>Unsafe Version</th><th>Safe Version</th></tr>
+            <tr>
+                <td>List All Users</td><td>None</td>
+                <td><a href="attack/listUser.jsp">attack/listUser.jsp</a></td>                
+            </tr>
+            <tr>
+                <td>Show User Id 1</td><td><a href="attack/showUser.jsp?id=1">attack/showUser.jsp?id=1</a></td>
+                <td><a href="safe/showUser.jsp?id=1">safe/showUser.jsp?id=1</a></td>
+            </tr>
+        </table>
+        
+    </body>
+</html>
