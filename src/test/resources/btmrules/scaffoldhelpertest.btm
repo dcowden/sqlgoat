@@ -1,0 +1,11 @@
+#
+# Forces java.sql.Connection.prepareStatement to throw an error.
+# For testing only.
+#
+RULE break timezone.getDisplayName
+CLASS java.util.TimeZone
+METHOD getDisplayName
+HELPER com.triage.rulehelpers.TestHelper
+IF TRUE
+DO  return getTestString();
+ENDRULE

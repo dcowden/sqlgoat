@@ -1,0 +1,10 @@
+#
+# Forces java.sql.Connection.prepareStatement to throw an error.
+# For testing only.
+#
+RULE break timezone.getDisplayName
+CLASS java.util.TimeZone
+METHOD getDisplayName
+IF TRUE
+DO  throw new RuntimeException("worked");
+ENDRULE
