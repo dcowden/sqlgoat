@@ -4,15 +4,15 @@
  * and open the template in the editor.
  */
 
-package com.triage.sqlgoat;
+package com.triage.sqlgoat.tests;
 
 import com.triage.config.Configuration;
 import com.triage.rulehelpers.DynamicSqlException;
 import com.triage.rulehelpers.ProbableSqlInjectionException;
-import com.triage.sqlgoat.userselectors.BasicDynamic;
-import com.triage.sqlgoat.userselectors.BasicPrepared;
-import com.triage.sqlgoat.userselectors.Result;
-import com.triage.sqlgoat.userselectors.UserSelector;
+import com.triage.sqlgoat.database.BasicDynamic;
+import com.triage.sqlgoat.database.BasicPrepared;
+import com.triage.sqlgoat.database.Result;
+import com.triage.sqlgoat.database.UserSelector;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

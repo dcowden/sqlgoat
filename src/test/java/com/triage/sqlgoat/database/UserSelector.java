@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.triage.sqlgoat.userselectors;
+package com.triage.sqlgoat.database;
 
 import java.sql.SQLException;
 import java.util.List;

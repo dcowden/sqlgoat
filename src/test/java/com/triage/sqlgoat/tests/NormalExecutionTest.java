@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package com.triage.sqlgoat;
+package com.triage.sqlgoat.tests;
 
-import com.triage.sqlgoat.userselectors.BasicDynamic;
-import com.triage.sqlgoat.userselectors.Result;
-import com.triage.sqlgoat.userselectors.UserSelector;
+import com.triage.sqlgoat.database.BasicDynamic;
+import com.triage.sqlgoat.database.Result;
+import com.triage.sqlgoat.database.UserSelector;
 import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;

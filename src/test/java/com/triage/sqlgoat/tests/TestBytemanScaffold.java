@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 
-package com.triage.sqlgoat;
+package com.triage.sqlgoat.tests;
 
-import com.triage.sqlgoat.userselectors.Result;
 import org.jboss.byteman.contrib.bmunit.BMNGListener;
 import org.jboss.byteman.contrib.bmunit.BMRule;
 import org.jboss.byteman.contrib.bmunit.BMScript;

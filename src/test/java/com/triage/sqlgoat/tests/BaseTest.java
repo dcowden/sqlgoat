@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 
-package com.triage.sqlgoat;
+package com.triage.sqlgoat.tests;
 
-import static com.triage.sqlgoat.NormalExecutionTest.INMEMDB_URL;
+import static com.triage.sqlgoat.tests.NormalExecutionTest.INMEMDB_URL;
 import javax.sql.DataSource;
 import org.flywaydb.core.Flyway;
 import org.hsqldb.jdbc.JDBCDataSource;

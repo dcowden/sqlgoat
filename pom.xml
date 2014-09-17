@@ -41,6 +41,17 @@
             <version>1.6</version>
         </dependency>
         <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>test-jetty-servlet</artifactId>
+            <version>8.1.15.v20140411</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.owasp.esapi</groupId>
+            <artifactId>esapi</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -93,7 +104,8 @@
                 <version>2.4.3</version>
                 <configuration>
                     <includes>
-                        <include>com/triage/sqlgoat/*Test.java</include>
+                        <include>com/triage/learning/tests/*.java</include>
+                        <include>com/triage/sqlgoat/tests/*.java</include>
                     </includes>
                     <!-- make sure maven puts the byteman jar in the classpath rather than in a manifest jar -->
                     <useManifestOnlyJar>false</useManifestOnlyJar>

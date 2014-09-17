@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package com.triage.sqlgoat;
+package com.triage.sqlgoat.tests;
 
-import com.triage.sqlgoat.userselectors.BasicDynamic;
-import com.triage.sqlgoat.userselectors.BasicPrepared;
-import com.triage.sqlgoat.userselectors.Result;
-import com.triage.sqlgoat.userselectors.UserSelector;
+import com.triage.sqlgoat.database.BasicDynamic;
+import com.triage.sqlgoat.database.BasicPrepared;
+import com.triage.sqlgoat.database.Result;
+import com.triage.sqlgoat.database.UserSelector;
 import java.sql.SQLException;
 import static org.testng.Assert.*;
 
