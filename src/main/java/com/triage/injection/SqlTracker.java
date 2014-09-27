@@ -38,7 +38,7 @@ public class SqlTracker {
     protected Configuration config = null;
     
     //key is the siteID, value is the statement prepared.
-    private static final Map<String,String> sqlStatements = new ConcurrentHashMap<>();
+    private static final Map<String,String> sqlStatements = new ConcurrentHashMap<String,String>();
     
     public boolean statementLooksLikeInjection(String sqlStatement){
        return SqlParse.isSQLi(sqlStatement);

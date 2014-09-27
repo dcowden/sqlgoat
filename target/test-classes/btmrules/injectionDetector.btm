@@ -1,0 +1,13 @@
+#
+# Watches for sql that appears to be dynamic
+# This one only catches preparedStatement-- there are others to catch too
+#
+#
+RULE error for dynamic sql
+INTERFACE java.sql.Connection
+METHOD prepareStatement
+HELPER com.triage.rulehelpers.TraceMatchingHelper
+BIND sqlStatement = $1
+IF TRUE
+DO  testSql(sqlStatement );
+ENDRULE

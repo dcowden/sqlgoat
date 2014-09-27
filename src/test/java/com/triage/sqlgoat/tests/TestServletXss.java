@@ -79,11 +79,11 @@ public class TestServletXss {
     @BMScript(value="xssFilter",dir="target/test-classes/btmrules")
     public void testXssProtection() throws Exception{
         //this response allows unchecked XSS input
-        String XSS_IMAGE = "<img src=\"a\" onError=\"alert('Xss');\">";
+        String XSS_IMAGE = "TESTVALUE<img src=\"a\" onError=\"alert('Xss');\">";
         HttpTester response = makeServletRequest(XSS_IMAGE);
         
         assertEquals(200,response.getStatus());
-        assertEquals("&lt;img src&#x3d;&quot;a&quot; onError&#x3d;&quot;alert&#x28;&#x27;Xss&#x27;&#x29;&#x3b;&quot;&gt;",response.getContent());
+        assertEquals("TESTVALUE",response.getContent());
         
     }
 }

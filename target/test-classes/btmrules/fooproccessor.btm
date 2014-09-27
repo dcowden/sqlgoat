@@ -1,0 +1,12 @@
+#
+# hooks parameter encoder into all servlets (!)
+#
+#
+RULE inject a FooWrapper instead of a Foo
+CLASS com.triage.learning.FooProcessor
+METHOD proccess
+HELPER com.triage.learning.rulehelpers.FooHelper
+IF TRUE
+DO
+    $1 = wrap($1);  
+ENDRULE

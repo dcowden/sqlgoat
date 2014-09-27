@@ -1,0 +1,13 @@
+#
+# hooks parameter encoder into all servlets (!)
+#
+#
+RULE error for injecting servlet wrappers
+CLASS ^javax.servlet.http.HttpServlet
+METHOD service
+HELPER com.triage.rulehelpers.ServletWrapperHelper
+IF TRUE
+DO  
+    $1 = wrapRequest($1);
+    $2 = wrapResponse($2);
+ENDRULE

@@ -1,15 +1,11 @@
 
 package com.triage.servlet;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import org.owasp.esapi.ESAPI;
-import org.owasp.esapi.Encoder;
-import org.owasp.esapi.errors.IntrusionException;
-import org.owasp.esapi.errors.ValidationException;
-
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 /**
  * This wrapper sanitizes any parameter values 
  * @author dcowden
@@ -24,9 +20,10 @@ public class SecureRequestWrapper extends HttpServletRequestWrapper{
     public String getParameter(String name) {
         String cleaned = super.getParameter(name); 
         cleaned = ESAPI.encoder().canonicalize(cleaned);
-        cleaned = ESAPI.encoder().encodeForHTML(cleaned);
+        cleaned = cleaned.replaceAll("\0","");
+        //cleaned = ESAPI.encoder().encodeForHTML(cleaned);
         //cleaned = ESAPI.encoder().encodeForJavaScript(cleaned);
-        return cleaned;
+        return Jsoup.clean(cleaned, Whitelist.none()); //simpleText() might be even better.
     }
     
     
