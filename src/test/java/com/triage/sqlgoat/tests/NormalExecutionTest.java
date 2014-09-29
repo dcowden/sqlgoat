@@ -6,14 +6,11 @@
 
 package com.triage.sqlgoat.tests;
 
-import com.triage.sqlgoat.database.BasicDynamic;
-import com.triage.sqlgoat.database.Result;
-import com.triage.sqlgoat.database.UserSelector;
+import com.triage.sqlgoat.database.UserService;
 import java.util.List;
 import java.util.Map;
-import javax.sql.DataSource;
-import org.flywaydb.core.Flyway;
-import org.hsqldb.jdbc.JDBCDataSource;
+
+
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
@@ -34,11 +31,10 @@ public class NormalExecutionTest extends BaseTest{
     
     @Test
     public void testBasicBad(){
-        BasicDynamic b = new BasicDynamic();
-        Result results = b.listUsers(this.getDataSource(), UserSelector.DAVE);
-        assertEquals(results.getSize(),1);
+        List<Map<String,Object>> results = this.userService.listUsersUnsafe(UserService.DAVE);
+        assertEquals(results.size(),1);
 
-        assertEquals(results.getValue(0,"firstname"),"Dave");
+        assertEquals(results.get(0).get("firstname"),"Dave");
     }
     
 }

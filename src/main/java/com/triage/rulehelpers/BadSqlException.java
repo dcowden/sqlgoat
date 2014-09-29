@@ -15,9 +15,12 @@ public abstract class BadSqlException extends RuntimeException{
     protected String sql= "";
     
     public BadSqlException(String location, String sql){
-        super("Suspected Dynamic Sql: site='" + location + "',sql='" + sql + "'");
+        super("Suspected Bad Sql:',sql='" + sql + "' site='" + location + "'");
         this.location= location;
         this.sql = sql;
         
+    }
+    public BadSqlException(String sql){
+        this(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(new Throwable()),sql);
     }
 }

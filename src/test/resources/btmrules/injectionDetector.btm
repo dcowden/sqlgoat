@@ -9,5 +9,5 @@ METHOD prepareStatement
 HELPER com.triage.rulehelpers.TraceMatchingHelper
 BIND sqlStatement = $1
 IF TRUE
-DO  testSql(sqlStatement );
+DO  checkSqlInjection(sqlStatement );
 ENDRULE

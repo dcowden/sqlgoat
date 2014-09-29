@@ -16,8 +16,9 @@ public class TraceMatchingHelper extends Helper {
     public TraceMatchingHelper(Rule rule){
         super(rule);
     }
-    public void testSql(String sqlStatement){
-        SqlTracker tracker = new SqlTracker(Configuration.active);
+    
+    public void checkDynamicSql(String sqlStatement){
+        SqlTracker tracker = new SqlTracker();
         String stackFrame = this.formatStack();
         //you can only throw byteman exceptions out of helpers.
         //otherwise, byteman throws a 'misconfigured handler' exception
@@ -25,10 +26,26 @@ public class TraceMatchingHelper extends Helper {
         //the exception to the caller
         //https://developer.jboss.org/thread/178055
         try{
-            tracker.checkSql(stackFrame, sqlStatement);
+            tracker.checkDynamicSql(stackFrame, sqlStatement);
         }
         catch ( BadSqlException bse ){
             throw new ThrowException(bse);
         }
     }
+    
+    public void checkSqlInjection(String sqlStatement){
+        SqlTracker tracker = new SqlTracker();
+        String stackFrame = this.formatStack();
+        //you can only throw byteman exceptions out of helpers.
+        //otherwise, byteman throws a 'misconfigured handler' exception
+        //but if you throw a ThrowException, Byteman knows to deliver
+        //the exception to the caller
+        //https://developer.jboss.org/thread/178055
+        try{
+            tracker.checkSqlInjection(stackFrame, sqlStatement);
+        }
+        catch ( BadSqlException bse ){
+            throw new ThrowException(bse);
+        }
+    }     
 }

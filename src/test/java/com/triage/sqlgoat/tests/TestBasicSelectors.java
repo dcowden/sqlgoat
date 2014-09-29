@@ -6,10 +6,6 @@
 
 package com.triage.sqlgoat.tests;
 
-import com.triage.sqlgoat.database.BasicDynamic;
-import com.triage.sqlgoat.database.BasicPrepared;
-import com.triage.sqlgoat.database.Result;
-import com.triage.sqlgoat.database.UserSelector;
 import java.sql.SQLException;
 import static org.testng.Assert.*;
 
@@ -23,31 +19,25 @@ public class TestBasicSelectors extends BaseTest{
     
     public TestBasicSelectors() {
     }
-
-    protected int verifyUserCount( UserSelector selector, String id){
-        Result results = selector.listUsers(this.getDataSource(), id);
-        return results.getSize();
-    }
- 
-
+    
     @Test
     public void testBasicPreparedWithOutInjection(){
-        assertEquals(1,verifyUserCount(new BasicPrepared(),"1"));
+        assertEquals(1,this.userService.listUsersSafe("1").size());
     }
     
     @Test(expectedExceptions=RuntimeException.class)
     public void testBasicPreparedWithInjection(){
-        assertEquals(1,verifyUserCount(new BasicPrepared(),"1 OR 3=3"));
+        assertEquals(1,this.userService.listUsersSafe("1 OR 3=3").size());
     }
     
     @Test
     public void testBasicDynamicWithOutInjection(){
-        assertEquals(1,verifyUserCount(new BasicDynamic(),"1"));
+        assertEquals(1,this.userService.listUsersUnsafe("1").size());
     }
     
     @Test
     public void testBasicDynamicWithInjection(){
-        assertEquals(3,verifyUserCount(new BasicDynamic(),"1 OR 3=3"));
+        assertEquals(3,this.userService.listUsersUnsafe("1 OR 3=3").size());
     }    
  
 }

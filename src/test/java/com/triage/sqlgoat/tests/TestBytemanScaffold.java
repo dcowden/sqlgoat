@@ -14,12 +14,16 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import java.util.TimeZone;
 import com.triage.rulehelpers.TestHelper;
+import com.triage.springconfig.DbConfig;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 /**
  *
  * @author dcowden
  */
 @Listeners(BMNGListener.class)
-public class TestBytemanScaffold {
+@ContextConfiguration(classes=DbConfig.class)
+public class TestBytemanScaffold extends AbstractTestNGSpringContextTests{
 
     @Test
     public void testNoMods(){        
@@ -27,7 +31,7 @@ public class TestBytemanScaffold {
     }
     
     @Test(expectedExceptions=RuntimeException.class)
-    @BMRule(name="throw exception for PreparedStatement",
+    @BMRule(name="throw exception Timezone",
             targetClass="java.util.TimeZone",
             targetMethod="getDisplayName",
             action="throw new RuntimeException(\"ha ha\")")

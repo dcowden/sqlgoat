@@ -16,5 +16,9 @@ public class ProbableSqlInjectionException extends BadSqlException{
         super(location,sql);
     }
     
+    public ProbableSqlInjectionException( String sql){
+        super(sql);
+    }
+    
 }    
 

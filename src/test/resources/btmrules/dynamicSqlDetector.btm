@@ -1,0 +1,35 @@
+#
+# Watches for sql that appears to be dynamic
+# This one only catches preparedStatement-- there are others to catch too
+#
+#
+#RULE error for dynamic sql
+#INTERFACE java.sql.Connection
+#METHOD prepareStatement
+#HELPER com.triage.rulehelpers.TraceMatchingHelper
+#BIND sqlStatement = $1
+#IF TRUE
+##DO  checkDynamicSql(sqlStatement );
+#DO throw new RuntimeException("ha");
+#ENDRULE
+#
+#RULE error for dynamic sql-1
+#INTERFACE java.sql.Connection
+#METHOD prepareStatement
+#IF TRUE
+#DO throw new RuntimeException("ha");
+#ENDRULE
+
+#RULE error for dynamic sql-2
+#INTERFACE java.sql.Connection
+#METHOD prepareCall
+#IF TRUE
+#DO throw new RuntimeException("ha");
+#ENDRULE
+
+RULE puke jdbc template
+CLASS JdbcTemplate
+METHOD query
+IF TRUE
+DO throw new RuntimeException("ha");
+ENDRULE

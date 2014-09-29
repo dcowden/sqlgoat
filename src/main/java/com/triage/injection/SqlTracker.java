@@ -28,34 +28,33 @@ import org.testng.log4testng.Logger;
 public class SqlTracker {
     
     public SqlTracker(){
-        this.config = Configuration.active;
+        
     }
     
-    public SqlTracker(Configuration config){
-        this.config = config;
-    }
-    private static final Logger log = Logger.getLogger(SqlTracker.class);
-    protected Configuration config = null;
+    private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(SqlTracker.class);
+
     
     //key is the siteID, value is the statement prepared.
     private static final Map<String,String> sqlStatements = new ConcurrentHashMap<String,String>();
     
-    public boolean statementLooksLikeInjection(String sqlStatement){
-       return SqlParse.isSQLi(sqlStatement);
-    }
+
     
-    public void checkSql(String stackFrame, String sqlStatement){
+    //throws exception if the statement is dynamic sql
+    public void checkDynamicSql(String stackFrame, String sqlStatement){
+        debug("Checking for Dynamic Sql...");
         if ( isStatementDynamic(stackFrame,sqlStatement)){
-            if ( config.isAllowDynamicSql()){
-                if ( statementLooksLikeInjection(sqlStatement)){
-                   throw new ProbableSqlInjectionException(sqlStatement,stackFrame);
-                }                
-            }
-            else{
-                throw new DynamicSqlException(sqlStatement,stackFrame);
-            }
+            throw new DynamicSqlException(sqlStatement,stackFrame);
         }
     }
+    
+    //throws exception if the statement is sql injection
+    public void checkSqlInjection(String stackFrame, String sqlStatement){
+        debug("Checking for Sql Injection...");
+        if ( statementLooksLikeInjection(sqlStatement)){
+             throw new ProbableSqlInjectionException(stackFrame,sqlStatement);
+        }         
+    }
+    
     public boolean isStatementDynamic(String stackFrame, String sqlStatement){
         String siteId = computeSiteIdFromStackFrame(stackFrame);
         if ( siteContainsStatement(siteId,sqlStatement)){
@@ -66,6 +65,10 @@ public class SqlTracker {
             return false;
         }
 
+    }
+    
+    public boolean statementLooksLikeInjection(String sqlStatement){
+       return SqlParse.isSQLi(sqlStatement);
     }
     
     protected void storeStatement(String siteId, String sqlStatement){

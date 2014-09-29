@@ -15,5 +15,7 @@ public class DynamicSqlException extends BadSqlException{
     public DynamicSqlException(String location, String sql) {
          super(location,sql);
     }
-    
+    public DynamicSqlException(String sql){
+        super(sql);
+    }
 }

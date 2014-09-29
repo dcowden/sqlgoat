@@ -6,42 +6,35 @@
 
 package com.triage.sqlgoat.tests;
 
-import static com.triage.sqlgoat.tests.NormalExecutionTest.INMEMDB_URL;
+import com.triage.springconfig.Config;
+import com.triage.springconfig.DbConfig;
+import com.triage.sqlgoat.database.UserService;
 import javax.sql.DataSource;
-import org.flywaydb.core.Flyway;
-import org.hsqldb.jdbc.JDBCDataSource;
-import org.jboss.byteman.contrib.bmunit.BMNGRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 /**
  *
  * @author dcowden
  */
-public class BaseTest {
+@ContextConfiguration(classes=DbConfig.class)
+public class BaseTest extends AbstractTestNGSpringContextTests{
 
     
     public static final String INMEMDB_URL = "jdbc:hsqldb:mem:usermemdb";
     public static final String DB_USER = "SA";
-    
-    protected DataSource datasource;
-    
-    public DataSource getDataSource(){
-        return datasource;
+        
+    @Autowired
+    protected UserService userService;
+
+    public UserService getUserService() {
+        return userService;
     }
-    
-    protected void setupDataSource(){
-        JDBCDataSource jds = new JDBCDataSource();
-        jds.setUrl(INMEMDB_URL);
-        jds.setUser("SA");
-        jds.setPassword("");
-        this.datasource = jds;
-    }    
     
     @org.testng.annotations.BeforeMethod
     public void setUpMethod() throws Exception {
-        setupDataSource();
-        Flyway f = new Flyway();
-        f.setDataSource(datasource);
-        f.migrate();
+
     }
     
 }
